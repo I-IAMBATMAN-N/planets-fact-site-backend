@@ -20,6 +20,27 @@ const planetParameters = document.querySelectorAll(
 
 let planetData = {};
 
+//
+function changePageContent(planet) {
+  // console.log("PLANET FRONTEND", planet);
+  //
+  const { rotation, revolution, radius, temperature } = planet;
+  const parameters = [rotation, revolution, radius, temperature];
+  //
+  // display image
+  img.setAttribute("src", `${planet.images.planet}`);
+  // display main heading
+  headingPrimary.innerText = planet.name;
+  //display panet info text
+  planetInfoText.innerText = planet.overview.content;
+  //display Wikipedia link source
+  planetInfoLink.setAttribute("href", `${planet.overview.source}`);
+  //display planet parameters
+  planetParameters.forEach((parameter, index) => {
+    parameter.children[1].innerText = parameters[index];
+  });
+}
+
 function navBtnListener() {
   navBtn.addEventListener("click", function (e) {
     // console.log(this);
@@ -71,26 +92,7 @@ function setColor(item) {
 
 //
 function mainNavListener() {
-  function changePageContent(planet) {
-    console.log("PLANET FRONTEND", planet);
-    //
-    const { rotation, revolution, radius, temperature } = planet;
-    const parameters = [rotation, revolution, radius, temperature];
-    //
-    // display image
-    img.setAttribute("src", `${planet.images.planet}`);
-    // display main heading
-    headingPrimary.innerText = planet.name;
-    //display panet info text
-    planetInfoText.innerText = planet.overview.content;
-    //display Wikipedia link source
-    planetInfoLink.setAttribute("href", `${planet.overview.source}`);
-    //display planet parameters
-    planetParameters.forEach((parameter, index) => {
-      parameter.children[1].innerText = parameters[index];
-    });
-  }
-
+  //
   navItems.forEach((navItem) => {
     navItem.addEventListener("click", function (e) {
       //
@@ -120,7 +122,7 @@ function mainNavListener() {
 function secNavListener() {
   function changeSectionContent(planet, thisText) {
     //
-    console.log("changeSectionContent - planet", planet);
+    // console.log("changeSectionContent - planet", planet);
     //
     let textString;
     let sourceString;
@@ -189,4 +191,24 @@ window.addEventListener("load", function () {
 
   //
   secNavListener();
+
+  const getInitialPlanet = async (name) => {
+    const initial = await fetch(`http://127.0.0.1:5000/api/v1/${name}`);
+    const data = initial.json();
+
+    return data;
+  };
+
+  const firstPlanet = navItems[0].children[0].innerText.toLowerCase();
+
+  // console.log("firstPlanetd", firstPlanet);
+  //
+  getInitialPlanet(firstPlanet).then((data) => {
+    //
+    const initialPlanet = data.data;
+
+    planetData = initialPlanet;
+
+    changePageContent(initialPlanet);
+  });
 });
