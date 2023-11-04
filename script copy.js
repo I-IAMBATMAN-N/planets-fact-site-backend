@@ -27,6 +27,22 @@ function changePageContent(planet) {
   const { rotation, revolution, radius, temperature } = planet;
   const parameters = [rotation, revolution, radius, temperature];
   //
+  const radiusNo = Number(radius.slice(0, -2).replace(",", ""));
+
+  if (radiusNo < 5000) {
+    //
+    img.style.width = "40%";
+  } else if (radiusNo < 10000) {
+    //
+    img.style.width = "55%";
+  } else if (radiusNo > 30000) {
+    //
+    img.style.width = "70%";
+  } else if (radiusNo > 70000) {
+    //
+    img.style.width = "85%";
+  }
+
   // display image
   img.setAttribute("src", `${planet.images.planet}`);
   // display main heading
@@ -97,7 +113,9 @@ function mainNavListener() {
     navItem.addEventListener("click", function (e) {
       //
       const getPlanet = async (name) => {
-        const initial = await fetch(`http://127.0.0.1:5000/api/v1/${name}`);
+        const initial = await fetch(
+          `https:/jb-fm-api.netlify.app/api/planet-facts/${name}`
+        );
         const data = initial.json();
 
         return data;
@@ -193,7 +211,9 @@ window.addEventListener("load", function () {
   secNavListener();
 
   const getInitialPlanet = async (name) => {
-    const initial = await fetch(`http://127.0.0.1:5000/api/v1/${name}`);
+    const initial = await fetch(
+      `https:/jb-fm-api.netlify.app/api/planet-facts/${name}`
+    );
     const data = initial.json();
 
     return data;

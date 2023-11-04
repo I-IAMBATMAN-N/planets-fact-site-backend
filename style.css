@@ -294,9 +294,9 @@ body {
 .secondary-nav--item {
   border: solid 0.1rem var(--color-border);
 }
-/* .secondary-nav--item.active {
-  border: solid 0.1rem var(--color-border);
-} */
+.secondary-nav--item.active a span:first-child {
+  color: #ffff;
+}
 .secondary-nav--item .heading-tertiary span:first-child {
   margin-right: 2.4rem;
   color: var(--color-text-secondary);
