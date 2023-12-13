@@ -626,6 +626,9 @@ body {
     align-items: center;
     text-align: center;
   }
+  .planet-info--text {
+    min-height: 18rem;
+  }
   .secondary-nav {
     position: fixed;
 
