@@ -350,6 +350,9 @@ body {
   flex-direction: column;
   gap: 2.4rem;
 }
+.planet-info--text {
+  min-height: 18rem;
+}
 .planet-info--link {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -480,6 +483,9 @@ body {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 40%;
     flex: 0 0 40%;
+  }
+  .planet-info--text {
+    min-height: 0rem;
   }
   .secondary-nav--item {
     padding: 1.6rem;
@@ -625,9 +631,6 @@ body {
     -ms-flex-align: center;
     align-items: center;
     text-align: center;
-  }
-  .planet-info--text {
-    min-height: 18rem;
   }
   .secondary-nav {
     position: fixed;
