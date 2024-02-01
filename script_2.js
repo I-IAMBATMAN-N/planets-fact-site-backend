@@ -225,6 +225,7 @@ window.addEventListener("load", function () {
   //
   getInitialPlanet(firstPlanet).then((data) => {
     //
+    console.log("data", data);
     const initialPlanet = data.data;
 
     planetData = initialPlanet;
